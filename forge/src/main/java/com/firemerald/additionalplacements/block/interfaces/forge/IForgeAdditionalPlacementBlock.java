@@ -55,7 +55,7 @@ public interface IForgeAdditionalPlacementBlock<T extends Block> extends IPlacem
     @Override
     default boolean makesOpenTrapdoorAboveClimbable(BlockState state, LevelReader level, BlockPos pos, BlockState trapdoorState) {
         BlockState modelState = getModelState(state);
-        return state.getBlock().makesOpenTrapdoorAboveClimbable(modelState, level, pos, trapdoorState);
+        return modelState.getBlock().makesOpenTrapdoorAboveClimbable(modelState, level, pos, trapdoorState);
     }
 
     @Override
