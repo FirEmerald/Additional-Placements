@@ -1,6 +1,8 @@
 package com.firemerald.additionalplacements.client.models.retextured;
 
 import com.firemerald.additionalplacements.client.models.IAPUnbakedModel;
+import com.firemerald.additionalplacements.client.models.Unwrapper;
+import net.minecraft.client.renderer.block.BlockModelShaper;
 import net.minecraft.client.renderer.block.model.ItemOverrides;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.*;
@@ -20,11 +22,13 @@ public class UnbakedRetexturedPlacementModel<T extends UnbakedRetexturedPlacemen
 
 	@Override
 	public BakedModel bake(ModelBaker baker, Function<Material, TextureAtlasSprite> spriteGetter, ModelState modelState, ItemOverrides overrides, ResourceLocation modelLocation) {
-		return BakedRetexturedPlacementModel.of(baker.bake(ourModelLocation, modelState), theirModelState);
+		BakedModel theirModel = Unwrapper.unwrap(baker.bake(BlockModelShaper.stateToModelLocation(theirModelState), modelState));
+		return BakedRetexturedPlacementModel.of(baker.bake(ourModelLocation, modelState), theirModel, theirModelState);
 	}
 
 	@Override
 	public void resolveParents(Function<ResourceLocation, UnbakedModel> function) {
 		function.apply(ourModelLocation);
+		function.apply(BlockModelShaper.stateToModelLocation(theirModelState));
 	}
 }

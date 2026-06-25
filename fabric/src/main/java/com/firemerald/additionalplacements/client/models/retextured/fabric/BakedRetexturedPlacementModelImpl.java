@@ -6,11 +6,11 @@ import net.minecraft.client.resources.model.BakedModel;
 import net.minecraft.world.level.block.state.BlockState;
 
 public class BakedRetexturedPlacementModelImpl extends BakedRetexturedPlacementModel implements PlacementModelWrapperImpl {
-	public static BakedRetexturedPlacementModel of(BakedModel ourModel, BlockState theirModelState) {
-		return new BakedRetexturedPlacementModelImpl(ourModel, theirModelState);
+	public static BakedRetexturedPlacementModel of(BakedModel ourModel, BakedModel theirModel, BlockState theirModelState) {
+		return new BakedRetexturedPlacementModelImpl(ourModel, theirModel, theirModelState);
 	}
 
-	private BakedRetexturedPlacementModelImpl(BakedModel ourModel, BlockState theirModelState) {
-		super(ourModel, theirModelState);
+	private BakedRetexturedPlacementModelImpl(BakedModel ourModel, BakedModel theirModel, BlockState theirModelState) {
+		super(ourModel, theirModel, theirModelState);
     }
 }
