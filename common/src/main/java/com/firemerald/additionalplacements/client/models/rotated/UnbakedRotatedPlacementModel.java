@@ -1,7 +1,9 @@
 package com.firemerald.additionalplacements.client.models.rotated;
 
 import com.firemerald.additionalplacements.client.models.IAPUnbakedModel;
+import com.firemerald.additionalplacements.client.models.Unwrapper;
 import com.firemerald.additionalplacements.util.BlockRotation;
+import net.minecraft.client.renderer.block.BlockModelShaper;
 import net.minecraft.client.renderer.block.model.ItemOverrides;
 import net.minecraft.client.renderer.texture.TextureAtlasSprite;
 import net.minecraft.client.resources.model.*;
@@ -23,9 +25,12 @@ public class UnbakedRotatedPlacementModel<T extends UnbakedRotatedPlacementModel
 
 	@Override
 	public BakedModel bake(ModelBaker baker, Function<Material, TextureAtlasSprite> spriteGetter, ModelState modelState, ItemOverrides overrides, ResourceLocation modelLocation) {
-		return BakedRotatedPlacementModel.of(this.modelState, modelRotation, rotatesTexture);
+		BakedModel theirModel = Unwrapper.unwrap(baker.bake(BlockModelShaper.stateToModelLocation(this.modelState), modelState));
+		return BakedRotatedPlacementModel.of(theirModel, this.modelState, modelRotation, rotatesTexture);
 	}
 
 	@Override
-	public void resolveParents(Function<ResourceLocation, UnbakedModel> function) {}
+	public void resolveParents(Function<ResourceLocation, UnbakedModel> function) {
+		function.apply(BlockModelShaper.stateToModelLocation(this.modelState));
+	}
 }

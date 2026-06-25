@@ -16,17 +16,18 @@ import java.util.List;
 
 public class BakedRetexturedPlacementModel implements PlacementModelWrapper {
 	@ExpectPlatform
-	public static BakedRetexturedPlacementModel of(BakedModel ourModel, BlockState theirModelState) {
+	public static BakedRetexturedPlacementModel of(BakedModel ourModel, BakedModel theirModel, BlockState theirModelState) {
 		throw new AssertionError();
 	}
 
 	private BakedModel ourModel;
 	private boolean ourModelMissing = false;
 	private final BlockState theirModelState;
-	private BakedModel theirModel;
+	private final BakedModel theirModel;
 
-	protected BakedRetexturedPlacementModel(BakedModel ourModel, BlockState theirModelState) {
+	protected BakedRetexturedPlacementModel(BakedModel ourModel, BakedModel theirModel, BlockState theirModelState) {
 		this.ourModel = ourModel;
+		this.theirModel = theirModel;
 		this.theirModelState = theirModelState;
 	}
 
@@ -45,11 +46,6 @@ public class BakedRetexturedPlacementModel implements PlacementModelWrapper {
 
 	@Override
 	public BakedModel getVisualModel() {
-		if (theirModel == null) {
-			BakedModel model = Minecraft.getInstance().getBlockRenderer().getBlockModel(theirModelState);
-			if (model == null) model = Minecraft.getInstance().getModelManager().getMissingModel();
-			theirModel = Unwrapper.unwrap(model);
-		}
 		return theirModel;
 	}
 

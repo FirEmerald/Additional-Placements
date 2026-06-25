@@ -17,12 +17,12 @@ import org.jetbrains.annotations.Nullable;
 import java.util.List;
 
 public class BakedRotatedPlacementModelImpl extends BakedRotatedPlacementModel implements PlacementModelWrapperImpl {
-	public static BakedRotatedPlacementModel of(BlockState theirModelState, BlockRotation modelRotation, boolean rotatesTexture) {
-		return new BakedRotatedPlacementModelImpl(theirModelState, modelRotation, rotatesTexture);
+	public static BakedRotatedPlacementModel of(BakedModel theirModel, BlockState theirModelState, BlockRotation modelRotation, boolean rotatesTexture) {
+		return new BakedRotatedPlacementModelImpl(theirModel, theirModelState, modelRotation, rotatesTexture);
 	}
 
-	private BakedRotatedPlacementModelImpl(BlockState theirModelState, BlockRotation modelRotation, boolean rotatesTexture) {
-		super(theirModelState, modelRotation, rotatesTexture);
+	private BakedRotatedPlacementModelImpl(BakedModel theirModel, BlockState theirModelState, BlockRotation modelRotation, boolean rotatesTexture) {
+		super(theirModel, theirModelState, modelRotation, rotatesTexture);
     }
 
 	@Override
